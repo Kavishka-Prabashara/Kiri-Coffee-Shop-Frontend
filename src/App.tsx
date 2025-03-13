@@ -1,6 +1,6 @@
 import './App.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-// Assuming you have these components defined elsewhere
 import Navbar from './components/navBar';
 import Home from './pages/home';
 import Order from './pages/order';
@@ -11,15 +11,19 @@ import Footer from './components/footer';
 
 function App() {
     return (
-        <div>
-            <Navbar />
-            <Home />
-            <Order />
-            <Customer />
-            <Cart />
-            <Product />
-            <Footer />
-        </div>
+        <Router>
+            <div>
+                <Navbar />
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/order" element={<Order />} />
+                    <Route path="/customer" element={<Customer />} />
+                    <Route path="/cart" element={<Cart />} />
+                    <Route path="/product" element={<Product />} />
+                </Routes>
+                <Footer />
+            </div>
+        </Router>
     );
 }
 
