@@ -1,7 +1,9 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { addToCart } from "./cartSlice";
 
 interface Product {
-    id: number;
+    id: string;
     name: string;
     category: string;
     brand: string;
@@ -10,7 +12,22 @@ interface Product {
     image: string;
 }
 
-const AddProductCard: React.FC<Product> = ({ id, name, category, brand, price, stock, image }) => {
+const HomeProductCard: React.FC<Product> = ({ id, name, category, brand, price, stock, image }) => {
+    const dispatch = useDispatch();
+
+    const handleAddToCart = () => {
+        dispatch(
+            addToCart({
+                id,
+                name,
+                price,
+                image,
+                quantity: 1,
+            })
+        );
+    };
+
+
     return (
         <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800">
             <div className="h-56 w-full">
@@ -31,6 +48,7 @@ const AddProductCard: React.FC<Product> = ({ id, name, category, brand, price, s
 
                     <button
                         type="button"
+                        onClick={handleAddToCart}
                         className="inline-flex items-center rounded-lg bg-blue-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                     >
                         Add to cart
@@ -41,4 +59,4 @@ const AddProductCard: React.FC<Product> = ({ id, name, category, brand, price, s
     );
 };
 
-export default AddProductCard;
+export default HomeProductCard;
